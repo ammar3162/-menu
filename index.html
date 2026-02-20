@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كشري وأكثر - المنيو الرقمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #d90429;
+            --soft-cream: #ffffff; /* لون خلفية لانو */
+            --dark-text: #2d2d2d;
+            --white: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0; padding: 0;
+            background-color: var(--soft-bg);
+            color: var(--dark-text);
+        }
+
+        /* الهيدر العلوي */
+        .header-section {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('كشري الاصلي.jpeg');
+            background-size: cover; background-position: center;
+            height: 220px; position: relative; display: flex; align-items: center; justify-content: center;
+        }
+
+        .logo-box {
+            width: 100px; height: 100px; background: white;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; border: 3px solid var(--primary-red);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: absolute; bottom: -50px;
+        }
+
+        .logo-box span { color: var(--primary-red); font-weight: 900; font-size: 0.9rem; text-align: center; line-height: 1.2; }
+
+        .brand-content { margin-top: 60px; text-align: center; }
+        .brand-content h1 { margin: 0; font-size: 1.6rem; font-weight: 900; color: var(--dark-text); }
+
+        /* أيقونات التواصل الاجتماعي الملونة */
+        .social-links { display: flex; justify-content: center; gap: 20px; margin: 15px 0; }
+        .social-links a { font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+        .fa-snapchat { color: #FFFC00; text-shadow: 1px 1px 2px #000; }
+        .fa-instagram { color: #E1306C; }
+        .fa-tiktok { color: #000000; }
+        .fa-location-dot { color: #4285F4; }
+
+        /* الأقسام في المنتصف */
+        .nav-wrapper {
+            background: white; padding: 15px 0;
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex; justify-content: center; /* توسيط الأقسام */
+        }
+
+        .nav-scroll {
+            display: flex; gap: 15px; overflow-x: auto;
+            scrollbar-width: none; padding: 0 10px;
+        }
+        .nav-scroll::-webkit-scrollbar { display: none; }
+
+        .nav-btn {
+            display: flex; flex-direction: column; align-items: center;
+            min-width: 70px; text-decoration: none; color: inherit;
+        }
+
+        .icon-circle {
+            width: 55px; height: 55px; border-radius: 50%;
+            background: #fff5f5; border: 1px solid #ffe0e0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; transition: 0.3s; color: var(--primary-red);
+        }
+
+        .nav-btn:hover .icon-circle { background: var(--primary-red); color: white; transform: translateY(-3px); }
+        .nav-btn span { font-size: 0.75rem; font-weight: 700; margin-top: 8px; }
+
+        /* القائمة والمنتجات */
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        .section-title {
+            font-weight: 900; font-size: 1.3rem; margin: 30px 0 20px;
+            color: var(--dark-text); border-right: 5px solid var(--primary-red); padding-right: 12px;
+        }
+
+        .card { background: white; border-radius: 20px; margin-bottom: 25px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
+        .card-body { padding: 15px; }
+        .card-title { font-weight: 900; font-size: 1.1rem; margin-bottom: 8px; }
+        .card-desc { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
+
+        .price-list { border-top: 1px solid #eee; }
+        .price-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f9f9f9; }
+        .price-item:last-child { border-bottom: none; }
+        .p-size { font-weight: 700; font-size: 0.9rem; color: #444; }
+        .p-price { font-weight: 900; color: var(--primary-red); }
+
+        /* نافذة التكبير */
+        .zoom-box {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center;
+        }
+        .zoom-box img { max-width: 90%; max-height: 80%; border-radius: 10px; }
+
+        footer { text-align: center; padding: 40px; color: #999; font-size: 0.8rem; }
+   
+
+        html { 
+            scroll-behavior: smooth; 
+            /* هذا هو الكود الجديد */
+            scroll-padding-top: 100px; 
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0; 
+            padding: 0;
+            background-color: var(--soft-cream);
+            color: var(--dark-text);
+        }
+
+        /* رأس الصفحة - تصميم لانو */
+        .header-bg {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('كشري الاصلي.jpeg');
+            background-size: cover; background-position: center;
+            height: 180px; position: relative;
+        }
+
+        .brand-logo-container {
+            position: absolute; bottom: -40px; left: 50%;
+            transform: translateX(-50%); text-align: center;
+        }
+
+        .logo-circle {
+            width: 90px; height: 90px; background: white;
+            border-radius: 50%; padding: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #fff;
+        }
+
+        .logo-circle img { width: 80%; }
+
+        .brand-info { margin-top: 45px; text-align: center; }
+        .brand-info h1 { margin: 0; font-size: 1.4rem; font-weight: 900; }
+        .social-bar { display: flex; justify-content: center; gap: 15px; margin: 10px 0; }
+        .social-bar span { font-size: 1.2rem; cursor: pointer; }
+        
+
+        /* أيقونات الأقسام الدائرية */
+        .categories-scroll {
+            display: flex; overflow-x: auto; padding: 20px 10px;
+            gap: 15px; background: white; sticky-top: 0;
+            scrollbar-width: none; border-bottom: 1px solid #eee;
+        }
+        .categories-scroll::-webkit-scrollbar { display: none; }
+
+        .cat-card {
+            display: flex; flex-direction: column; align-items: center;
+            min-width: 75px; text-decoration: none; color: inherit;
+        }
+
+
+        /* شريط الأقسام المستطيل المطور */
+    .nav-container {
+        background: white; 
+        padding: 15px 0;
+        position: sticky; 
+        top: 0; 
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        display: flex; 
+        justify-content: center; /* توسيط في المنتصف */
+    }
+
+    .nav-scroll {
+        display: flex; 
+        gap: 12px; 
+        overflow-x: auto;
+        scrollbar-width: none; 
+        padding: 0 15px;
+    }
+    .nav-scroll::-webkit-scrollbar { display: none; }
+
+    .nav-btn {
+        text-decoration: none; 
+        color: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* تحويل الدائرة إلى مستطيل أنيق */
+    .nav-btn span {
+        background: #f8f9fa; /* لون خلفية هادئ */
+        color: #333;
+        padding: 10px 20px; /* مساحة داخلية للمستطيل */
+        border-radius: 12px; /* زوايا منحنية قليلاً لشكل مستطيل احترافي */
+        font-size: 0.9rem;
+        font-weight: 700;
+        border: 1px solid #eee;
+        transition: 0.3s all ease;
+        white-space: nowrap; /* منع النص من النزول لسطر جديد */
+    }
+
+    /* تأثير عند الضغط أو التمرير */
+    .nav-btn:hover span {
+        background: var(--primary-red);
+        color: white;
+        border-color: var(--primary-red);
+        transform: translateY(-2px);
+    }
+
+        .cat-icon-box {
+            width: 65px; height: 65px; background: white;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 1.6rem;
+            border: 1px solid #e0e0e0; transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .cat-card:hover .cat-icon-box { border-color: var(--primary-red); transform: translateY(-3px); }
+        .cat-text { font-size: 0.75rem; font-weight: 700; margin-top: 8px; white-space: nowrap; }
+
+        /* حاوية المنيو */
+        .menu-section { padding: 15px; max-width: 500px; margin: auto; }
+        .section-name { font-weight: 900; font-size: 1.2rem; margin: 25px 0 15px; display: block; border-right: 4px solid var(--primary-red); padding-right: 10px; }
+
+        /* كرت الصنف */
+        .product-item {
+            background: var(--white); border-radius: 18px;
+            margin-bottom: 25px; overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+        }
+
+        .product-img { width: 100%; height: 220px; object-fit: cover; cursor: pointer; }
+
+        .product-body { padding: 15px; }
+        .product-title { font-weight: 900; font-size: 1.1rem; margin-bottom: 5px; }
+        .product-desc { font-size: 0.85rem; color: #666; line-height: 1.4; margin-bottom: 12px; }
+
+        /* جدول الأسعار */
+        .price-table { width: 100%; border-top: 1px solid #f5f5f5; }
+        .price-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f9f9f9; }
+        .price-row:last-child { border-bottom: none; }
+        .size-label { font-size: 0.9rem; font-weight: 600; color: #444; }
+        .price-val { font-weight: 900; color: var(--primary-red); font-size: 1rem; }
+
+        /* نافذة التكبير */
+        .zoom-overlay {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            z-index: 2000; justify-content: center; align-items: center;
+        }
+        .zoom-overlay img { max-width: 90%; max-height: 80%; border-radius: 10px; }
+
+        footer { text-align: center; padding: 30px; font-size: 0.8rem; color: #888; }
+    </style>
+</head>
+<body>
+</head>
+<body>
+
+   <div class="header-section">
+        <div class="logo-box">
+            <img src="logo.jpg" alt=" كشري وأكثر" style="width: 80%; height: 80%; object-fit: contain;">
+        </div>
+    </div>
+
+    <div class="brand-content">
+        <h1>كشري وأكثر</h1>
+        <div class="social-links">
+            <a href="#"><i class="fa-brands fa-snapchat"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#"><i class="fa-solid fa-location-dot"></i></a>
+        </div>
+    </div>
+
+  <nav class="nav-wrapper">
+    <div class="nav-scroll">
+        <a href="#kushari" class="nav-btn"><span>الكشري</span></a>
+        <a href="#mukbilat" class="nav-btn"><span>الأطباق الجانبية</span></a>
+        <a href="#sweets" class="nav-btn"><span>الحلويات</span></a>
+        <a href="#drinks" class="nav-btn"><span>مشروبات</span></a>
+        <a href="#extras" class="nav-btn"><span>إضافات</span></a>
+    </div>
+</nav>
+
+    <div class="menu-section">
+        
+        <h2 id="kushari" class="section-name">أصناف الكشري الملكي</h2>
+        <div class="product-item">
+            <img src="كشري الاصلي.jpeg" class="product-img" onclick="openZoom(this.src)">
+            <div class="product-body">
+                <div class="product-title">كشري "وأكثر" الأصلي</div>
+                <p class="product-desc">المزيج الأصلي من الأرز، العدس، المكرونة والورد المقرمش.</p>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">سنقل (صغير / كبير)</span> <span class="price-val">15 / 20 ريال</span></div>
+                    <div class="price-row"><span class="size-label">دبل (صغير / كبير)</span> <span class="price-val">30 / 40 ريال</span></div>
+                    <div class="price-row"><span class="size-label">عائلي (صغير / كبير)</span> <span class="price-val">50 / 75 ريال</span></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="product-item">
+            <img src="كشري كبدة.jpeg" class="product-img" onclick="openZoom(this.src)">
+            <div class="product-body">
+                <div class="product-title">كشري بالكبدة الإسكندراني</div>
+                <p class="product-desc">كبدة طازجة متبلة بخلطة الثوم والخل المميزة.</p>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">سنقل (صغير / كبير)</span> <span class="price-val">20 / 25 ريال</span></div>
+                    <div class="price-row"><span class="size-label">دبل (صغير / كبير)</span> <span class="price-val">40 / 65 ريال</span></div>
+                    <div class="price-row"><span class="size-label">عائلي</span> <span class="price-val">85 ريال</span></div>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <div class="product-item">
+            <img src="كشري جمبري.jpeg" class="product-img" onclick="openZoom(this.src)">
+            <div class="product-body">
+                <div class="product-title">كشري بالجمبري</div>
+                <p class="product-desc"> لعشاق التجديد! طبق الكشري التقليدي كما تحبه، لكن مع لمسة بحرية مقرمشة. قطع من الجمبري المتبل والمقلي بعناية، تضفي طعماً فريداً مع كل ملعقة. توازن مثالي بين قرمشة الجمبري وليونة العدس والأرز.</p>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">سنقل (صغير / كبير)</span> <span class="price-val">20 / 25 ريال</span></div>
+                    <div class="price-row"><span class="size-label">دبل (صغير / كبير)</span> <span class="price-val">40 / 65 ريال</span></div>
+                    <div class="price-row"><span class="size-label">عائلي</span> <span class="price-val">85 ريال</span></div>
+                </div>
+            </div>
+        </div>
+
+
+        <h2 id="mukbilat" class="section-name"> الاطباق الجانبية</h2>
+        <div class="product-item">
+            <img src="كرات البطاطس.jpeg" class="product-img" onclick="openZoom(this.src)">
+            <div class="product-body">
+                <div class="product-title"> كرات البطاطس </div>
+                <p class="product-desc"> كرات البطاطس المقرمشة المحضرة بعناية مع التوابل العربية الأصيلة تقدم ساخنة ومقرمشة من الخارج وناعمة من الداخل لتكون إضافة شهية لوجبتك</p>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">سنقل (صغير / كبير)</span> <span class="price-val">20 / 40 ريال</span></div>
+                    <div class="price-row"><span class="size-label">دبل (صغير / كبير)</span> <span class="price-val">60 / 80 ريال</span></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+         <div class="product-item">
+            <img src="حواووشي اسكندراني.jpeg" class="product-img" onclick="openZoom(this.src)">
+            <div class="product-body">
+                <div class="product-title"> حواوشي اسكندراني </div>
+                <p class="product-desc"> كرات البطاطس المقرمشة المحضرة بعناية مع التوابل العربية الأصيلة تقدم ساخنة ومقرمشة من الخارج وناعمة من الداخل لتكون إضافة شهية لوجبتك</p>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label"> بالدجاج</span> <span class="price-val">15 ريال</span></div>
+                    <div class="price-row"><span class="size-label"> باللحم</span> <span class="price-val">20 ريال</span></div>
+                    <div class="price-row"><span class="size-label"> بالخبز المصري</span> <span class="price-val">15 ريال</span></div>
+                </div>
+            </div>
+        </div>
+
+
+        <h2 id="sweets" class="section-name"> الحلويات </h2>
+        <div class="product-item">
+            <img src="ارز بالحليب.jpeg" class="product-img" onclick="openZoom(this.src)">
+            <div class="product-body">
+                <div class="product-title"> ارز بالحليب   </div>
+                <p class="product-desc"> أرز وحليب طازج مطهو ببطء. طعم أصلي، قوام غني، وحلاوة موزونة.  </p>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label"> ساده </span> <span class="price-val">6 ريال</span></div>
+                    <div class="price-row"><span class="size-label">بالمكسرات </span> <span class="price-val">8 ريال</span></div>
+                    <div class="price-row"><span class="size-label">بالفرن </span> <span class="price-val">10 ريال</span></div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="product-item">
+            <img src="ام علي .jpg" class="product-img" onclick="openZoom(this.src)">
+            <div class="product-body">
+                <div class="product-title"> ام علي  </div>
+                <p class="product-desc">   مزيج مخملي من الحليب الفاخر ورقائق العجين المقرمشة، مغطاة بطبقة غنية من الفستق الحلبي والورد المحمدي. توازن مثالي بين النعومة والقرمشة في كل ملعقة  </p>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label"> الصحن  </span> <span class="price-val">12 ريال</span></div>
+         </div>
+
+
+
+        <div class="product-item">
+            <img src="كريمة بالفرن.jpeg" class="product-img" onclick="openZoom(this.src)">
+            <div class="product-body">
+                <div class="product-title"> كريمة بالفرن   </div>
+                <p class="product-desc">  انغمس في لـذاذة الرقائق الهشة المنقوعة في شلال من الحليب الغني والقشطة، تُخبز حتى تكتسب وجهاً ذهبياً ساحراً. مزينة بسخاء بالفستق الحلبي والورد لتمنحك توازناً مثالياً بين الدفء والقرمشة في كل ملعقة.</p>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label"> الصحن  </span> <span class="price-val">9 ريال</span></div>
+         </div>
+
+        
+           <h2 id="drinks" class="section-name">المشروبات  </h2>
+
+           <div id="drinks" class="product-item">
+            <img src="ديو.jpg" class="product-img" onclick="openZoom(this.src)">
+                <div class="product-title">ديو </div>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">3 ريال</span></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="drinks" class="product-item">
+            <img src="بيبسي.jpg" class="product-img" onclick="openZoom(this.src)">
+                <div class="product-title">بيبسي </div>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">3 ريال</span></div>
+                </div>
+        </div>
+
+
+        <div id="drinks" class="product-item">
+            <img src="ميرندا.jpg" class="product-img" onclick="openZoom(this.src)">
+                <div class="product-title">ميرندا برتقال </div>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">3 ريال</span></div>
+                </div>
+        </div>
+
+
+        <div id="drinks" class="product-item">
+            <img src="سفن اب.jpg" class="product-img" onclick="openZoom(this.src)">
+                <div class="product-title"> سفن اب </div>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">3 ريال</span></div>
+                </div>
+        </div>
+
+
+        <div id="drinks" class="product-item">
+            <img src="اكوافينا.webp" class="product-img" onclick="openZoom(this.src)">
+                <div class="product-title">  مويا </div>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">1 ريال</span></div>
+                </div>
+        </div>
+
+
+        <div id="drinks" class="product-item">
+            <img src="عصير كركديه.jpeg" class="product-img" onclick="openZoom(this.src)">
+                <div class="product-title">  كركدية </div>
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">صغير</span> <span class="price-val">7 ريال</span></div>
+                    <div class="price-row"><span class="size-label">كبير</span> <span class="price-val">15 ريال</span></div>
+
+                </div>
+        </div>
+
+
+
+
+                
+
+
+
+
+        <h2 id="extras" class="section-name">الإضافات </h2>
+        <div class="product-item">
+            <div class="product-body">
+                <div class="price-table">
+                    <div class="price-row"><span class="size-label">عدس / بصل / حمص</span> <span class="price-val">5 ريال</span></div>
+                    <div class="price-row"><span class="size-label">طحينة / خبز مقرمش / دقة / شطة</span> <span class="price-val">1 ريال</span></div>
+                </div>
+            </div>
+        </div>
+
+      
+
+    </div>
+
+    <div id="zoomOverlay" class="zoom-overlay" onclick="this.style.display='none'">
+        <img id="zoomedImg" src="">
+    </div>
+
+    <footer>
+        <p>كشري وأكثر - صبيا | صامطة</p>
+        <p>© 2026 جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        function openZoom(src) {
+            document.getElementById('zoomedImg').src = src;
+            document.getElementById('zoomOverlay').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
