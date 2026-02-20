@@ -192,17 +192,16 @@
     }
 
     /* تحويل الدائرة إلى مستطيل أنيق */
-    .nav-btn span {
-        background: #f8f9fa; /* لون خلفية هادئ */
-        color: #333;
-        padding: 6px 10px; /* مساحة داخلية للمستطيل */
-        border-radius: 12px; /* زوايا منحنية قليلاً لشكل مستطيل احترافي */
-        font-size: 0.rem;
-        font-weight: 700;
-        border: 1px solid #eee;
-        transition: 0.3s all ease;
-        white-space: nowrap; /* منع النص من النزول لسطر جديد */
-    }
+    .nav-wrapper {
+    background: #ffffff;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center; /* يضع الأزرار في منتصف الشاشة */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
 
     /* تأثير عند الضغط أو التمرير */
     .nav-btn:hover span {
