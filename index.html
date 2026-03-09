@@ -3,497 +3,1222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كشري وأكثر - المنيو الرقمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>كشري وأكثر - قائمة الطعام الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-red: #b70000bc;
-            --soft-cream: #ffffff; /* لون خلفية لانو */
-            --dark-text: #2d2d2d;
-            --white: #ffffff;
-        }
-
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Cairo', sans-serif;
-            margin: 0; padding: 0;
-            background-color: var(--soft-bg);
-            color: var(--dark-text);
-        }
-
-        /* الهيدر العلوي */
-        .header-section {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('كشري الاصلي.jpeg');
-            background-size: cover; background-position: center;
-            height: 220px; position: relative; display: flex; align-items: center; justify-content: center;
-        }
-
-        .logo-box {
-            width: 100px; height: 100px; background: white;
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; border: 3px solid var(--primary-red);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: absolute; bottom: -50px;
-        }
-
-        .logo-box span { color: var(--primary-red); font-weight: 900; font-size: 0.9rem; text-align: center; line-height: 1.2; }
-
-        .brand-content { margin-top: 60px; text-align: center; }
-        .brand-content h1 { margin: 0; font-size: 1.6rem; font-weight: 900; color: var(--dark-text); }
-
-        /* أيقونات التواصل الاجتماعي الملونة */
-        .social-links { display: flex; justify-content: center; gap: 20px; margin: 15px 0; }
-        .social-links a { font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
-        .fa-snapchat { color: #FFFC00; text-shadow: 1px 1px 2px #000; }
-        .fa-instagram { color: #E1306C; }
-        .fa-tiktok { color: #000000; }
-        .fa-location-dot { color: #4285F4; }
-
-        /* الأقسام في المنتصف */
-        .nav-wrapper {
-            background: white; padding: 15px 0;
-            position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex; justify-content: center; /* توسيط الأقسام */
-        }
-
-        .nav-scroll {
-            display: flex; gap: 15px; overflow-x: auto;
-            scrollbar-width: none; padding: 0 10px;
-        }
-        .nav-scroll::-webkit-scrollbar { display: none; }
-
-        .nav-btn {
-            display: flex; flex-direction: column; align-items: center;
-            min-width: 70px; text-decoration: none; color: inherit;
-        }
-
-        .icon-circle {
-            width: 55px; height: 55px; border-radius: 50%;
-            background: #fff5f5; border: 1px solid #ffe0e0;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; transition: 0.3s; color: var(--primary-red);
-        }
-
-        .nav-btn:hover .icon-circle { background: var(--primary-red); color: white; transform: translateY(-3px); }
-        .nav-btn span { font-size: 0.75rem; font-weight: 700; margin-top: 8px; }
-
-        /* القائمة والمنتجات */
-        .container { max-width: 450px; margin: auto; padding: 15px; }
-        .section-title {
-            font-weight: 900; font-size: 1.3rem; margin: 30px 0 20px;
-            color: var(--dark-text); border-right: 5px solid var(--primary-red); padding-right: 12px;
-        }
-
-        .card { background: white; border-radius: 20px; margin-bottom: 25px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .card-img { width: 100%; height: 280px; object-fit: cover; cursor: pointer; }
-        .card-body { padding: 15px; }
-        .card-title { font-weight: 900; font-size: 1.1rem; margin-bottom: 8px; }
-        .card-desc { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
-
-        .price-list { border-top: 1px solid #eee; }
-        .price-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f9f9f9; }
-        .price-item:last-child { border-bottom: none; }
-        .p-size { font-weight: 700; font-size: 0.9rem; color: #444; }
-        .p-price { font-weight: 900; color: var(--primary-red); }
-
-        /* نافذة التكبير */
-        .zoom-box {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center;
-        }
-        .zoom-box img { max-width: 90%; max-height: 80%; border-radius: 10px; }
-
-        footer { text-align: center; padding: 40px; color: #999; font-size: 0.8rem; }
-   
-
-        html { 
-            scroll-behavior: smooth; 
-            /* هذا هو الكود الجديد */
-            scroll-padding-top: 100px; 
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            margin: 0; 
+        * {
+            margin: 0;
             padding: 0;
-            background-color: var(--soft-cream);
-            color: var(--dark-text);
+            box-sizing: border-box;
         }
 
-        /* رأس الصفحة - تصميم لانو */
-        .header-bg {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('كشري الاصلي.jpeg');
-            background-size: cover; background-position: center;
-            height: 180px; position: relative;
+        :root {
+            --primary-red: #b70000;
+            --primary-dark: #8b0000;
+            --secondary-gold: #d4af37;
+            --cream: #fff8f0;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray-medium: #888888;
+            --gray-dark: #333333;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.16);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .brand-logo-container {
-            position: absolute; bottom: -40px; left: 50%;
-            transform: translateX(-50%); text-align: center;
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .logo-circle {
-            width: 90px; height: 90px; background: white;
-            border-radius: 50%; padding: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            display: flex; align-items: center; justify-content: center;
-            border: 2px solid #fff;
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #fff8f0 0%, #fff 100%);
+            color: var(--gray-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .logo-circle img { width: 80%; }
-
-        .brand-info { margin-top: 45px; text-align: center; }
-        .brand-info h1 { margin: 0; font-size: 1.4rem; font-weight: 900; }
-        .social-bar { display: flex; justify-content: center; gap: 15px; margin: 10px 0; }
-        .social-bar span { font-size: 1.2rem; cursor: pointer; }
-        
-
-        /* أيقونات الأقسام الدائرية */
-        .categories-scroll {
-            display: flex; overflow-x: auto; padding: 20px 10px;
-            gap: 15px; background: white; sticky-top: 0;
-            scrollbar-width: none; border-bottom: 1px solid #eee;
-        }
-        .categories-scroll::-webkit-scrollbar { display: none; }
-
-        .cat-card {
-            display: flex; flex-direction: column; align-items: center;
-            min-width: 75px; text-decoration: none; color: inherit;
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
         }
 
-
-        /* شريط الأقسام المستطيل المطور */
-    .nav-container {
-        background: white; 
-        padding: 15px 0;
-        position: sticky; 
-        top: 0; 
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        display: flex; 
-        justify-content: center; /* توسيط في المنتصف */
-    }
-
-    .nav-scroll {
-        display: flex; 
-        gap: 12px; 
-        overflow-x: auto;
-        scrollbar-width: none; 
-        padding: 0 15px;
-    }
-    .nav-scroll::-webkit-scrollbar { display: none; }
-
-    .nav-btn {
-        text-decoration: none; 
-        color: inherit;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* تحويل الدائرة إلى مستطيل أنيق */
- .nav-wrapper {
-        background: #ffffff;
-        padding: 12px 0;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        display: flex;
-        justify-content: center; /* توسيط الأزرار في حال كانت شاشة الجوال عريضة */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.03); /* ظل خفيف جداً لإعطاء عمق */
-    }
-
-    /* تأثير عند الضغط أو التمرير */
-    .nav-btn:hover span {
-        background: var(--primary-red);
-        color: white;
-        border-color: var(--primary-red);
-        transform: translateY(-2px);
-    }
-
-        .cat-icon-box {
-            width: 65px; height: 65px; background: white;
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 1.6rem;
-            border: 1px solid #e0e0e0; transition: 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .cat-card:hover .cat-icon-box { border-color: var(--primary-red); transform: translateY(-3px); }
-        .cat-text { font-size: 0.75rem; font-weight: 700; margin-top: 8px; white-space: nowrap; }
-
-        /* حاوية المنيو */
-        .menu-section { padding: 15px; max-width: 500px; margin: auto; }
-        .section-name { font-weight: 900; font-size: 1.2rem; margin: 25px 0 15px; display: block; border-right: 4px solid var(--primary-red); padding-right: 10px; }
-
-        /* كرت الصنف */
-        .product-item {
-            background: var(--white); border-radius: 18px;
-            margin-bottom: 10px; overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--gray-light);
+            border-top: 4px solid var(--primary-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .product-img { width: 100%; height: 220px; object-fit: cover; cursor: pointer; }
-
-        .product-body { padding: 15px; }
-        .product-title { font-weight: 900; font-size: 1.1rem; margin-bottom: 5px; }
-        .product-desc { font-size: 0.85rem; color: #666; line-height: 1.4; margin-bottom: 12px; }
-
-        /* جدول الأسعار */
-        .price-table { width: 100%; border-top: 1px solid #f5f5f5; }
-        .price-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f9f9f9; }
-        .price-row:last-child { border-bottom: none; }
-        .size-label { font-size: 0.9rem; font-weight: 600; color: #444; }
-        .price-val { font-weight: 900; color: var(--primary-red); font-size: 1rem; }
-
-        /* نافذة التكبير */
-        .zoom-overlay {
-            display: none; position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.9);
-            z-index: 2000; justify-content: center; align-items: center;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .zoom-overlay img { max-width: 90%; max-height: 80%; border-radius: 10px; }
 
-        footer { text-align: center; padding: 30px; font-size: 0.8rem; color: #888; }
+        .loading-text {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        /* Header Section */
+        .header-hero {
+            position: relative;
+            height: 320px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('كشري الاصلي.jpeg');            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .header-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .brand-container {
+            position: relative;
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 4px solid var(--secondary-gold);
+            transition: var(--transition);
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .brand-logo i {
+            font-size: 3rem;
+            color: var(--primary-red);
+        }
+
+        .brand-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--white);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .brand-subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary-gold);
+            font-weight: 500;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Social Links */
+        .social-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 25px 0;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--gray-light);
+            color: var(--gray-dark);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .social-link.snapchat:hover {
+            background: #FFFC00;
+            color: #000;
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .social-link.tiktok:hover {
+            background: #000;
+            color: white;
+        }
+
+        .social-link.location:hover {
+            background: #4285F4;
+            color: white;
+        }
+
+        /* Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.95);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 15px 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--gray-dark);
+            min-width: 80px;
+            margin: 0 10px;
+            transition: var(--transition);
+            padding: 8px;
+            border-radius: 12px;
+        }
+
+        .nav-item:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+        }
+
+        .nav-item.active {
+            color: var(--primary-red);
+        }
+
+        .nav-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: 50%;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .nav-item:hover .nav-icon {
+            background: var(--primary-red);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(183,0,0,0.3);
+        }
+
+        .nav-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px 50px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin: 40px 0 25px;
+            position: relative;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-red);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-left: 15px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--gray-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-red);
+            border-radius: 2px;
+        }
+
+        /* Product Cards */
+        .product-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(183,0,0,0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gray-dark);
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: var(--gray-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .price-table {
+            border-top: 1px solid var(--gray-light);
+            padding-top: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: var(--transition);
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+        }
+
+        .price-row:hover {
+            padding-right: 10px;
+        }
+
+        .size-label {
+            font-weight: 600;
+            color: var(--gray-dark);
+            font-size: 0.95rem;
+        }
+
+        .price-value {
+            font-weight: 800;
+            color: var(--primary-red);
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Simple Product Card (for drinks and extras) */
+        .simple-product {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .simple-product:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .simple-product-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--cream);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px;
+            font-size: 1.5rem;
+            color: var(--primary-red);
+        }
+
+        .simple-product-info {
+            flex: 1;
+        }
+
+        .simple-product-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .simple-product-price {
+            color: var(--primary-red);
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        /* Image Zoom Modal */
+        .zoom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .zoom-modal.active {
+            display: flex;
+        }
+
+        .zoom-image {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease-out;
+        }
+        .logo-img{
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close-zoom {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-zoom:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--gray-dark) 0%, #000 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--secondary-gold);
+            margin-bottom: 15px;
+        }
+
+        .footer-text {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-copyright {
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-red);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .brand-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+
+            .nav-item {
+                min-width: 70px;
+                margin: 0 5px;
+            }
+
+            .nav-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .nav-text {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Animation on Scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+  .product-img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
     </style>
 </head>
 <body>
-</head>
-<body>
-
-   <div class="header-section">
-        <div class="logo-box">
-            <img src="logo.jpg" alt=" كشري وأكثر" style="width: 80%; height: 80%; object-fit: contain;">
-        </div>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+       <img src="logo.jpg" alt="كشري وأكثر" class="loading-logo">
+       <div class="loading-text">كشري وأكثر</div>
     </div>
 
-    <div class="brand-content">
-        <h1>كشري وأكثر</h1>
-        <div class="social-links">
-            <a href="#"><i class="fa-brands fa-snapchat"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#"><i class="fa-solid fa-location-dot"></i></a>
+    <!-- Header Hero Section -->
+   <header class="header-hero">
+    <div class="brand-container">
+        <div class="brand-logo floating">
+            <img src="logo.jpg" alt="كشري وأكثر" class="logo-img">
         </div>
+        <h1 class="brand-title">كشري وأكثر</h1>
+        <p class="brand-subtitle">المذاق المصري الأصيل</p>
+    </div>
+</header>
+    <!-- Social Bar -->
+    <div class="social-bar">
+        <a href="https://www.snapchat.com/@kshrywkthr" class="social-link snapchat" title="Snapchat">
+            <i class="fab fa-snapchat-ghost"></i>
+        </a>
+        <a href="https://www.instagram.com/koshary.ak/?hl=ar" class="social-link instagram" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@kshrywkthr..2022" class="social-link tiktok" title="TikTok">
+            <i class="fab fa-tiktok"></i>
+        </a>
     </div>
 
-  <nav class="nav-wrapper">
-    <div class="nav-scroll">
-        <a href="#kushari" class="nav-btn"><span>الكشري</span></a>
-        <a href="#mukbilat" class="nav-btn"><span>الأطباق الجانبية</span></a>
-        <a href="#sweets" class="nav-btn"><span>الحلويات</span></a>
-        <a href="#drinks" class="nav-btn"><span>مشروبات</span></a>
-        <a href="#extras" class="nav-btn"><span>إضافات</span></a>
-    </div>
-</nav>
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <a href="#kushari" class="nav-item active">
+                <div class="nav-icon">
+                    <i class="fas fa-bowl-rice"></i>
+                </div>
+                <span class="nav-text">الكشري</span>
+            </a>
+            <a href="#sides" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span class="nav-text">أطباق جانبية</span>
+            </a>
+            <a href="#sweets" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-ice-cream"></i>
+                </div>
+                <span class="nav-text">حلويات</span>
+            </a>
+            <a href="#drinks" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-glass-water"></i>
+                </div>
+                <span class="nav-text">مشروبات</span>
+            </a>
+            <a href="#extras" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
+                <span class="nav-text">إضافات</span>
+            </a>
+        </div>
+    </nav>
 
-    <div class="menu-section">
-        
-        <h2 id="kushari" class="section-name">أصناف الكشري الملكي</h2>
-        <div class="product-item">
-            <img src="كشري الاصلي.jpeg" class="product-img" onclick="openZoom(this.src)">
-            <div class="product-body">
-                <div class="product-title">كشري "وأكثر" الأصلي</div>
-                <p class="product-desc">المزيج الأصلي من الأرز، العدس، المكرونة والورد المقرمش.</p>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">سنقل (صغير / كبير)</span> <span class="price-val">15 / 20 ريال</span></div>
-                    <div class="price-row"><span class="size-label">دبل (صغير / كبير)</span> <span class="price-val">30 / 40 ريال</span></div>
-                    <div class="price-row"><span class="size-label">عائلي (صغير / كبير)</span> <span class="price-val">50 / 75 ريال</span></div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Kushari Section -->
+        <section id="kushari" class="fade-in">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-bowl-rice"></i>
+                </div>
+                <h2 class="section-title">أصناف الكشري </h2>
+            </div>
+
+            <div class="product-card fade-in">
+                <span class="product-badge">الأكثر طلباً</span>
+                <img src="كشري الاصلي.jpeg" alt="كشري أصلي" class="product-image" onclick="openZoom(this.src)">
+                <div class="product-content">
+                    <h3 class="product-name">كشري "وأكثر" الأصلي</h3>
+                    <p class="product-description">المزيج الأصلي من الأرز، العدس، المكرونة والورد المقرمش مع صلصة الطماطم السحرية والتوابل المصرية الأصيلة.</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">سنجل (صغير)</span>
+                            <span class="price-value">15 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">سنجل (كبير)</span>
+                            <span class="price-value">20 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دبل (صغير)</span>
+                            <span class="price-value">30 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دبل (كبير)</span>
+                            <span class="price-value">40 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">عائلي (صغير)</span>
+                            <span class="price-value">50 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">عائلي (كبير)</span>
+                            <span class="price-value">75 ريال</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-
-        <div class="product-item">
-            <img src="كشري كبدة.jpeg" class="product-img" onclick="openZoom(this.src)">
-            <div class="product-body">
-                <div class="product-title">كشري بالكبدة الإسكندراني</div>
-                <p class="product-desc">كبدة طازجة متبلة بخلطة الثوم والخل المميزة.</p>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">سنقل (صغير / كبير)</span> <span class="price-val">20 / 25 ريال</span></div>
-                    <div class="price-row"><span class="size-label">دبل (صغير / كبير)</span> <span class="price-val">40 / 65 ريال</span></div>
-                    <div class="price-row"><span class="size-label">عائلي</span> <span class="price-val">85 ريال</span></div>
+            <div class="product-card fade-in">
+                <img src="كشري كبدة.jpeg" alt="كشري بالكبدة" class="product-image" onclick="openZoom(this.src)">
+                <div class="product-content">
+                    <h3 class="product-name">كشري بالكبدة الإسكندراني</h3>
+                    <p class="product-description">كبدة طازجة متبلة بخلطة الثوم والخل المميزة، مقطعة بعناية ومضاف عليها الكشري الأصلي لتجربة لا تُنسى.</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">سنجل (صغير)</span>
+                            <span class="price-value">20 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">سنجل (كبير)</span>
+                            <span class="price-value">25 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دبل (صغير)</span>
+                            <span class="price-value">40 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دبل (كبير)</span>
+                            <span class="price-value">65 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">عائلي</span>
+                            <span class="price-value">85 ريال</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-        
-        <div class="product-item">
-            <img src="كشري جمبري.jpeg" class="product-img" onclick="openZoom(this.src)">
-            <div class="product-body">
-                <div class="product-title">كشري بالجمبري</div>
-                <p class="product-desc"> لعشاق التجديد! طبق الكشري التقليدي كما تحبه، لكن مع لمسة بحرية مقرمشة. قطع من الجمبري المتبل والمقلي بعناية، تضفي طعماً فريداً مع كل ملعقة. توازن مثالي بين قرمشة الجمبري وليونة العدس والأرز.</p>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">سنقل (صغير / كبير)</span> <span class="price-val">20 / 25 ريال</span></div>
-                    <div class="price-row"><span class="size-label">دبل (صغير / كبير)</span> <span class="price-val">40 / 65 ريال</span></div>
-                    <div class="price-row"><span class="size-label">عائلي</span> <span class="price-val">85 ريال</span></div>
+            <div class="product-card fade-in">
+                <span class="product-badge">جديد</span>
+                <img src="كشري جمبري.jpeg" alt="كشري بالجمبري" class="product-image" onclick="openZoom(this.src)">
+                <div class="product-content">
+                    <h3 class="product-name">كشري بالجمبري</h3>
+                    <p class="product-description">لعشاق التجديد! طبق الكشري التقليدي مع لمسة بحرية مقرمشة. قطع من الجمبري المتبل والمقلي بعناية، تضفي طعماً فريداً مع كل ملعقة.</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">سنجل (صغير)</span>
+                            <span class="price-value">20 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">سنجل (كبير)</span>
+                            <span class="price-value">25 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دبل (صغير)</span>
+                            <span class="price-value">40 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دبل (كبير)</span>
+                            <span class="price-value">65 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">عائلي</span>
+                            <span class="price-value">85 ريال</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
+        <!-- Side Dishes Section -->
+        <section id="sides" class="fade-in">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h2 class="section-title">الأطباق الجانبية</h2>
+            </div>
 
-        <h2 id="mukbilat" class="section-name"> الاطباق الجانبية</h2>
-        <div class="product-item">
-            <img src="كرات البطاطس.jpeg" class="product-img" onclick="openZoom(this.src)">
-            <div class="product-body">
-                <div class="product-title"> كرات البطاطس </div>
-                <p class="product-desc"> كرات البطاطس المقرمشة المحضرة بعناية مع التوابل العربية الأصيلة تقدم ساخنة ومقرمشة من الخارج وناعمة من الداخل لتكون إضافة شهية لوجبتك</p>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">سنقل (صغير / كبير)</span> <span class="price-val">20 / 40 ريال</span></div>
-                    <div class="price-row"><span class="size-label">دبل (صغير / كبير)</span> <span class="price-val">60 / 80 ريال</span></div>
+            <div class="product-card fade-in">
+                <img src="كرات البطاطس 2.jpg" alt="كرات البطاطس" class="product-image" onclick="openZoom(this.src)">
+                <div class="product-content">
+                    <h3 class="product-name">كرات البطاطس المقرمشة</h3>
+                    <p class="product-description">كرات البطاطس المقرمشة المحضرة بعناية مع التوابل العربية الأصيلة تقدم ساخنة ومقرمشة من الخارج وناعمة من الداخل.</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">سنجل (صغير)</span>
+                            <span class="price-value">20 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">سنجل (كبير)</span>
+                            <span class="price-value">40 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دبل (صغير)</span>
+                            <span class="price-value">60 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دبل (كبير)</span>
+                            <span class="price-value">80 ريال</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-
-
-         <div class="product-item">
-            <img src="حواووشي اسكندراني.jpeg" class="product-img" onclick="openZoom(this.src)">
-            <div class="product-body">
-                <div class="product-title"> حواوشي اسكندراني </div>
-                <p class="product-desc"> خبز بلدي مقرمش محشو بلحم متبّل وعصاري، طعم مصري أصيل في كل قضمة</p>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label"> بالدجاج</span> <span class="price-val">15 ريال</span></div>
-                    <div class="price-row"><span class="size-label"> باللحم</span> <span class="price-val">20 ريال</span></div>
+            <div class="product-card fade-in">
+                <img src="حواووشي اسكندراني.jpeg" alt="حواوشي" class="product-image" onclick="openZoom(this.src)">
+                <div class="product-content">
+                    <h3 class="product-name">حواوشي إسكندراني</h3>
+                    <p class="product-description">خبز بلدي مقرمش محشو بلحم متبّل وعصاري، طعم مصري أصيل في كل قضمة. متوفر بالدجاج أو اللحم .</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">بالدجاج</span>
+                            <span class="price-value">15 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">باللحم</span>
+                            <span class="price-value">20 ريال</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
+        <!-- Sweets Section -->
+        <section id="sweets" class="fade-in">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-ice-cream"></i>
+                </div>
+                <h2 class="section-title">الحلويات </h2>
+            </div>
 
-        <h2 id="sweets" class="section-name"> الحلويات </h2>
-        <div class="product-item">
-            <img src="ارز بالحليب.jpeg" class="product-img" onclick="openZoom(this.src)">
-            <div class="product-body">
-                <div class="product-title"> ارز بالحليب   </div>
-                <p class="product-desc"> أرز وحليب طازج مطهو ببطء. طعم أصلي، قوام غني، وحلاوة موزونة.  </p>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label"> ساده </span> <span class="price-val">6 ريال</span></div>
-                    <div class="price-row"><span class="size-label">بالمكسرات </span> <span class="price-val">8 ريال</span></div>
-
-
+            <div class="product-card fade-in">
+                <img src="ارز بالحليب.jpeg" alt="أرز بالحليب" class="product-image" onclick="openZoom(this.src)">
+                <div class="product-content">
+                    <h3 class="product-name">أرز بالحليب</h3>
+                    <p class="product-description">أرز وحليب طازج مطهو ببطء على نار هادئة مع القليل من ماء الورد والهيل. طعم أصلي، قوام غني، وحلاوة موزونة.</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">ساده</span>
+                            <span class="price-value">6 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">بالمكسرات</span>
+                            <span class="price-value">8 ريال</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-        <div class="product-item">
-            <img src="ام علي .jpg" class="product-img" onclick="openZoom(this.src)">
-            <div class="product-body">
-                <div class="product-title"> ام علي  </div>
-                <p class="product-desc">   مزيج مخملي من الحليب الفاخر ورقائق العجين المقرمشة، مغطاة بطبقة غنية من الفستق الحلبي والورد المحمدي. توازن مثالي بين النعومة والقرمشة في كل ملعقة  </p>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label"> الصحن  </span> <span class="price-val">12 ريال</span></div>
-         </div>
-
-
-
-        <div class="product-item">
-            <img src="كريمة بالفرن.jpeg" class="product-img" onclick="openZoom(this.src)">
-            <div class="product-body">
-                <div class="product-title"> كريمة بالفرن   </div>
-                <p class="product-desc">  انغمس في لـذاذة الرقائق الهشة المنقوعة في شلال من الحليب الغني والقشطة، تُخبز حتى تكتسب وجهاً ذهبياً ساحراً. مزينة بسخاء بالفستق الحلبي والورد لتمنحك توازناً مثالياً بين الدفء والقرمشة في كل ملعقة.</p>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label"> الصحن  </span> <span class="price-val">9 ريال</span></div>
-         </div>
-
-        
-           <h2 id="drinks" class="section-name">المشروبات  </h2>
-
-           <div id="drinks" class="product-item">
-            <img src="ديو.webp" class="product-img" onclick="openZoom(this.src)">
-                <div class="product-title">ديو </div>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">3 ريال</span></div>
+            <div class="product-card fade-in">
+                <img src="ام علي .jpg" alt="أم علي" class="product-image" onclick="openZoom(this.src)">
+                <div class="product-content">
+                    <h3 class="product-name">أم علي</h3>
+                    <p class="product-description">مزيج مخملي من الحليب الفاخر ورقائق العجين المقرمشة، مغطاة بطبقة غنية من الفستق الحلبي والورد المحمدي.</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">الصحن</span>
+                            <span class="price-value">12 ريال</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-        <div id="drinks" class="product-item">
-            <img src="ببسي.webp" class="product-img" onclick="openZoom(this.src)">
-                <div class="product-title">بيبسي </div>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">3 ريال</span></div>
-                </div>
-        </div>
-
-
-        <div id="drinks" class="product-item">
-            <img src="ميرندا.png" class="product-img" onclick="openZoom(this.src)">
-                <div class="product-title">ميرندا برتقال </div>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">3 ريال</span></div>
-                </div>
-        </div>
-
-
-        <div id="drinks" class="product-item">
-            <img src="سفن ابب.jpeg" class="product-img" onclick="openZoom(this.src)">
-                <div class="product-title">سفن اب </div>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">3 ريال</span></div>
-                </div>
-        </div>
-
-
-        <div id="drinks" class="product-item">
-            <img src="اكوافينا.webp" class="product-img" onclick="openZoom(this.src)">
-                <div class="product-title">  مويا </div>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">بارد</span> <span class="price-val">1 ريال</span></div>
-                </div>
-        </div>
-
-
-        <div id="drinks" class="product-item">
-            <img src="عصير كركديه.jpeg" class="product-img" onclick="openZoom(this.src)">
-                <div class="product-title">  كركدية </div>
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">صغير</span> <span class="price-val">5 ريال</span></div>
-                    <div class="price-row"><span class="size-label">كبير</span> <span class="price-val">15 ريال</span></div>
-
-                </div>
-        </div>
-
-
-
-
-                
-
-
-
-
-        <h2 id="extras" class="section-name">الإضافات </h2>
-        <div class="product-item">
-            <div class="product-body">
-                <div class="price-table">
-                    <div class="price-row"><span class="size-label">عدس / بصل / حمص</span> <span class="price-val">5 ريال</span></div>
-                    <div class="price-row"><span class="size-label">طحينة / دقة / شطة</span> <span class="price-val">1 ريال</span></div>
+            <div class="product-card fade-in">
+                <img src="كريمة بالفرن.jpeg" alt="كريمة بالفرن" class="product-image" onclick="openZoom(this.src)">
+                <div class="product-content">
+                    <h3 class="product-name">كريمة بالفرن</h3>
+                    <p class="product-description">رقائق هشة منقوعة في شلال من الحليب الغني والقشطة، تُخبز حتى تكتسب وجهاً ذهبياً ساحراً ومزينة بالفستق والورد.</p>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">الصحن</span>
+                            <span class="price-value">9 ريال</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-      
+        <!-- Drinks Section -->
+        <section id="drinks" class="fade-in">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-glass-water"></i>
+                </div>
+                <h2 class="section-title">المشروبات الباردة</h2>
+            </div>
 
-    </div>
+            <div class="simple-product fade-in">
+                <div class="simple-product-icon">
+                 <img src="ديو.webp" alt="ديو" class="product-img">
+                </div>
+                   <div class="simple-product-info">
+                   <div class="simple-product-name">ديو</div>
+                   <div class="simple-product-price">3 ريال</div>
+               </div>
+            </div>
 
-    <div id="zoomOverlay" class="zoom-overlay" onclick="this.style.display='none'">
-        <img id="zoomedImg" src="">
-    </div>
+              <div class="simple-product fade-in">
+                <div class="simple-product-icon">
+                 <img src="ببسي.webp" alt="ديو" class="product-img">
+                </div>
+                   <div class="simple-product-info">
+                   <div class="simple-product-name">ببسي</div>
+                   <div class="simple-product-price">3 ريال</div>
+               </div>
+            </div>
 
+             <div class="simple-product fade-in">
+                <div class="simple-product-icon">
+                 <img src="ميرندا.png" alt="ميرندا" class="product-img">
+                </div>
+                   <div class="simple-product-info">
+                   <div class="simple-product-name">ميرندا برتقال </div>
+                   <div class="simple-product-price">3 ريال</div>
+               </div>
+            </div>
+
+             <div class="simple-product fade-in">
+                <div class="simple-product-icon">
+                 <img src="اكوافينا.webp" alt="مويا" class="product-img">
+                </div>
+                   <div class="simple-product-info">
+                   <div class="simple-product-name">مويا</div>
+                   <div class="simple-product-price">3 ريال</div>
+               </div>
+            </div>
+
+            <div class="simple-product fade-in">
+                <div class="simple-product-icon">
+                 <img src="عصير كركديه.jpeg" alt="كركديه" class="product-img">
+                </div>
+                   <div class="simple-product-info">
+                   <div class="simple-product-name">كركديه</div>
+                   <div class="simple-product-price">5 ريال</div>
+               </div>
+            </div>
+
+            
+        </section>
+
+        <!-- Extras Section -->
+        <section id="extras" class="fade-in">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
+                <h2 class="section-title">الإضافات</h2>
+            </div>
+
+            <div class="product-card fade-in">
+                <div class="product-content">
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="size-label">إضافة عدس</span>
+                            <span class="price-value">5 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">إضافة بصل محمر</span>
+                            <span class="price-value">5 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">إضافة حمص</span>
+                            <span class="price-value">5 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">طحينة</span>
+                            <span class="price-value">1 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">دقة</span>
+                            <span class="price-value">1 ريال</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="size-label">شطة</span>
+                            <span class="price-value">1 ريال</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
     <footer>
-        <p>كشري وأكثر - صبيا | صامطة</p>
-        <p>© 2026 جميع الحقوق محفوظة</p>
+        <div class="footer-content">
+            <div class="footer-logo">كشري وأكثر</div>
+            <p class="footer-text">صبيا | صامطة</p>
+            <p class="footer-text">نقدم لكم المذاق المصري الأصيل</p>
+            <div class="footer-copyright">
+                <p>© 2024 جميع الحقوق محفوظة</p>
+            </div>
+        </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Zoom Modal -->
+    <div class="zoom-modal" id="zoomModal">
+        <span class="close-zoom" onclick="closeZoom()">
+            <i class="fas fa-times"></i>
+        </span>
+        <img src="" alt="Zoomed Image" class="zoom-image" id="zoomedImage">
+    </div>
+
     <script>
-        function openZoom(src) {
-            document.getElementById('zoomedImg').src = src;
-            document.getElementById('zoomOverlay').style.display = 'flex';
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Navigation Active State
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').slice(1) === current) {
+                    item.classList.add('active');
+                }
+            });
         }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        // Smooth Scroll for Navigation
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                const targetSection = document.getElementById(targetId);
+                const navHeight = document.querySelector('.sticky-nav').offsetHeight;
+                const targetPosition = targetSection.offsetTop - navHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Image Zoom
+        function openZoom(src) {
+            const modal = document.getElementById('zoomModal');
+            const zoomedImage = document.getElementById('zoomedImage');
+            zoomedImage.src = src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeZoom() {
+            const modal = document.getElementById('zoomModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close zoom on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeZoom();
+            }
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Fade In Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effect to price rows
+        document.querySelectorAll('.price-row').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(90deg, transparent, rgba(183,0,0,0.05), transparent)';
+            });
+            row.addEventListener('mouseleave', function() {
+                this.style.background = 'transparent';
+            });
+        });
+
+        // Prevent image drag
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.nav-item, .social-link, .back-to-top').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
     </script>
 </body>
 </html>
